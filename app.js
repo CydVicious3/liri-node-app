@@ -2,7 +2,7 @@ require("dotenv").config();
 //require file system
 const fs = require('fs');
 // link key page
-var keys = require("./keys.js");
+const keys = require("./keys.js");
 // initialize spotify
 const Spotify = require('node-spotify-api');
 const spotify = new Spotify(keys.spotify);
@@ -20,8 +20,8 @@ let userQuery = process.argv.slice(3).join(" ");
 console.log(operation)
 console.log(topic)
 
-
-switch (operation) {
+// app logic
+switch (userInput) {
   case 'concert-this':
     concert()
     break;
@@ -39,6 +39,7 @@ switch (operation) {
     break;
 
   default:
+    console.log("I don't know!")
     break;
 }
 
@@ -49,7 +50,8 @@ switch (operation) {
 
 // * `concert-this`
 function concert() {
-  var queryURL = "https://rest.bandsintown.com/artists/" + topic + "/events?app_id=codingbootcamp"
+  console.log(`Searching For ... ${userQuery} Shows!`)
+  let queryURL = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp"
   console.log(queryURL)
 
   axios.get(queryURL).then(function (response) {
