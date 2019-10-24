@@ -30,13 +30,13 @@ switch (userInput) {
     song()
     break;
 
-  // case 'movie-this':
-  //   movies()
-  //   break;
+  case 'movie-this':
+    movies()
+    break;
 
-  // case 'do-what-it-says':
-  //   whatever()
-  //   break;
+  case 'do-what-it-says':
+    whatever()
+    break;
 
   default:
     console.log("I don't know!")
@@ -78,35 +78,32 @@ function concert() {
 //     .then(data => { }
 // }
 
-function (song) {
+function song() {
   console.log(`Searching For ... ${userQuery} Song!`);
   // * If no song is provided then your program will default to "The Sign" by Ace of Base.
   if (!userQuery) { userQuery = 'the sign ace of base' };
   spotify.search({ type: 'track', query: userQuery, limit: 1 }, function (error, data) {
     if (error) {
       console.log('Error:' + error);
-    }
-    // put spotify data in array
-    let spotifyArr = data.track.items;
-    for (i = 0; i < spotifyArr.length; i = ++) {
-      console.log(`Found this for you: \n\nArtist: ${data.track.items[i].album.artist[0].name} \nSong: ${data.track.items[i].name} \nSong Link: ${data.track.items[i].external_urls.spotify} \nAlbum: ${data.track.items[i].album.name}`)
-    }
-  })
-
+    })
 }
-// * Artist(s)
+// put spotify data in array
+let spotifyArr = data.track.items;
+for (i = 0; i < spotifyArr.length; i = ++) {
+  console.log(`Found this for you: \n\nArtist: ${data.track.items[i].album.artist[0].name} \nSong: ${data.track.items[i].name} \nSong Link: ${data.track.items[i].external_urls.spotify} \nAlbum: ${data.track.items[i].album.name}`)
+}
 
-//     * The song's name
-
-//       * A preview link of the song from Spotify
-
-//         * The album that the song is from
-
-// function movies() {
-
-
-//       }
-
+function movies() {
+  console.log(`Searching For ... "${userQuery}" `);
+  if (!userQuery) = { userQuery = "mr nobody"; };
+  request('http://www.omdbapi.com/?t=' + userQuery + '&apikey=trilogy', function (error, response) {
+  })
+}
+let userMovie = JSON.parse(body):
+  let ratingsArr = user.Ratings
+  if (ratingsArr.length > 2) {
+    
+  }
 // function whatever() {
 
 
