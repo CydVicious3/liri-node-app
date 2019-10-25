@@ -68,7 +68,6 @@ function concert() {
   } else {
     console.log('Band / Concert Not Found!');
   }
-
 }
 
 // function song() {
@@ -79,32 +78,42 @@ function concert() {
 // }
 
 function song() {
-  console.log(`Searching For ... ${userQuery} Song!`);
+  console.log(`Searching For ... ${userQuery} Song!`)
   // * If no song is provided then your program will default to "The Sign" by Ace of Base.
-  if (!userQuery) { userQuery = 'the sign ace of base' };
+  if (!userQuery) { userQuery = 'the sign ace of base' }
   spotify.search({ type: 'track', query: userQuery, limit: 1 }, function (error, data) {
     if (error) {
       console.log('Error:' + error);
-    })
-}
-// put spotify data in array
-let spotifyArr = data.track.items;
-for (i = 0; i < spotifyArr.length; i = ++) {
-  console.log(`Found this for you: \n\nArtist: ${data.track.items[i].album.artist[0].name} \nSong: ${data.track.items[i].name} \nSong Link: ${data.track.items[i].external_urls.spotify} \nAlbum: ${data.track.items[i].album.name}`)
-}
-
-function movies() {
-  console.log(`Searching For ... "${userQuery}" `);
-  if (!userQuery) = { userQuery = "mr nobody"; };
-  request('http://www.omdbapi.com/?t=' + userQuery + '&apikey=trilogy', function (error, response) {
+    }
   })
 }
-let userMovie = JSON.parse(body):
-  let ratingsArr = user.Ratings
-  if (ratingsArr.length > 2) {
-    
-  }
-// function whatever() {
+
+// song()
+// put spotify data in array
+// let spotifyArr = data.track.items
+// for (i = 0; i < spotifyArr.length; i++) {
+//   console.log("song")
+//   // console.log(`Found this for you: \n\nArtist: ${data.track.items[i].album.artist[0].name} \nSong: ${data.track.items[i].name} \nSong Link: ${data.track.items[i].external_urls.spotify} \nAlbum: ${data.track.items[i].album.name}`)
+// }
+// }
+
+movies()
 
 
-//       }
+
+function movies() {
+  console.log("hi")
+  // if (!userQuery) = { userQuery = "mr nobody" }
+  // request('http://www.omdbapi.com/?t=' + userQuery + '&apikey=trilogy', function (error, response) {
+  // })
+
+
+//   let userMovie = JSON.parse(body)
+//   let ratingsArr = user.Ratings
+//   if (ratingsArr.length > 2) {
+//   }
+// }
+// // function whatever() {
+
+
+// //       }
