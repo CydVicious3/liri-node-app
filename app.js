@@ -43,9 +43,6 @@ switch (userInput) {
     break;
 }
 
-
-//   * `movie-this`
-
 //   * `do-what-it-says`
 
 // * `concert-this`
@@ -88,31 +85,25 @@ function song() {
   })
 }
 
-// song()
-// put spotify data in array
-// let spotifyArr = data.track.items
-// for (i = 0; i < spotifyArr.length; i++) {
-//   console.log("song")
-//   // console.log(`Found this for you: \n\nArtist: ${data.track.items[i].album.artist[0].name} \nSong: ${data.track.items[i].name} \nSong Link: ${data.track.items[i].external_urls.spotify} \nAlbum: ${data.track.items[i].album.name}`)
-// }
-// }
+song()
+put spotify data in array
+let spotifyArr = data.track.items
+for (i = 0; i < spotifyArr.length; i++) {
+  console.log("song")
+  console.log(`Found this for you: \n\nArtist: ${data.track.items[i].album.artist[0].name} \nSong: ${data.track.items[i].name} \nSong Link: ${data.track.items[i].external_urls.spotify} \nAlbum: ${data.track.items[i].album.name}`)
+}
 
-movies()
-
-
-
+//   * `movie-this`
 function movies() {
-  console.log("hi")
-  // if (!userQuery) = { userQuery = "mr nobody" }
-  // request('http://www.omdbapi.com/?t=' + userQuery + '&apikey=trilogy', function (error, response) {
-  // })
+  if (!userQuery) = { userQuery = "mr nobody" }
+  request('http://www.omdbapi.com/?t=' + userQuery + '&apikey=trilogy', function (error, response) {
+  })
 
-
-//   let userMovie = JSON.parse(body)
-//   let ratingsArr = user.Ratings
-//   if (ratingsArr.length > 2) {
-//   }
-// }
+  let userMovie = JSON.parse(body)
+  let ratingsArr = user.Ratings
+  if (ratingsArr.length > 2) {
+  }
+}
 // // function whatever() {
 
 
