@@ -21,28 +21,31 @@ let userInput = process.argv[2];
 let userQuery = process.argv.slice(3).join(" ");
 
 // app logic
-switch (userInput) {
-  case 'concert-this':
-    concert()
-    break;
+function userCommand(userInput, userQuery) {
+  switch (userInput) {
+    case 'concert-this':
+      concert()
+      break;
 
-  case 'spotify-this-song':
-    song()
-    break;
+    case 'spotify-this-song':
+      song()
+      break;
 
-  case 'movie-this':
-    movies()
-    break;
+    case 'movie-this':
+      movies()
+      break;
 
-  case 'do-what-it-says':
-    whatever()
-    break;
+    case 'do-what-it-says':
+      whatever()
+      break;
 
-  default:
-    console.log("I don't know!")
-    break;
+    default:
+      console.log("I don't know!")
+      break;
+  }
 }
 
+userCommand(userInput, userQuery)
 
 // * `concert-this`
 function concert() {
@@ -92,23 +95,25 @@ for (i = 0; i < spotifyArr.length; i++) {
 }
 //   * `movie-this`
 function movies() {
-  if (!userQuery) = { userQuery = "mr nobody" }
-  request('http://www.omdbapi.com/?t=' + userQuery + '&apikey=trilogy', function (error, response) {
-  })
-
+  if (!userQuery) { userQuery = "mr nobody" }
+  request('http://www.omdbapi.com/?t=' + userQuery + '&apikey=trilogy')
   let userMovie = JSON.parse(body)
-  let ratingsArr = user.Ratings
+  let ratingsArr = userMovie.Ratings
   if (ratingsArr.length > 2) {
   }
-}
+  if (!error && response.statusCode === 200) {
+    console.log(`\nFound this...\n\n Title: ${userMovie.Title}\nReleased: ${userMovie.Year}\nIMDb Rating: ${userMovie.imdbRating}\nRotten Tomatoes Rating: ${userMovie.Ratings[1].Value}\nCountry: ${userMovie.Country}\nLanguage: ${userMovie.Language}\n Plot: ${userMovie.Plot}`)
+  } else {
+    console.log('Movie not found!' + error)
+  }
 
-//   * `do-what-it-says`
-function whatever() {
-  fs.readFile('random.txt', 'utf8', function (error, data) {
-    if (error) { return console.log(error); }
-    let dataArr = data.spotify(',');
-    userInput = dataArr[0];
-    userQuery = dataArr[1];
-    userCommand(userInput, userQuery);
-  })
-}
+  //   * `do-what-it-says`
+  function whatever() {
+    fs.readFile('random.txt', 'utf8', function (error, data) {
+      if (error) { return console.log(error); }
+      let dataArr = data.spotify(',');
+      userInput = dataArr[0];
+      userQuery = dataArr[1];
+      userCommand(userInput, userQuery);
+    })
+  }
