@@ -43,7 +43,6 @@ switch (userInput) {
     break;
 }
 
-//   * `do-what-it-says`
 
 // * `concert-this`
 function concert() {
@@ -68,7 +67,6 @@ function concert() {
 }
 
 // function song() {
-//   let spotify = new Spotify(keys.spotify);
 //   fetch('https://www.npmjs.com/package/node-spotify-api')
 //     .then(r => r.json())
 //     .then(data => { }
@@ -76,6 +74,7 @@ function concert() {
 
 function song() {
   console.log(`Searching For ... ${userQuery} Song!`)
+  let spotify = new Spotify(keys.spotify);
   // * If no song is provided then your program will default to "The Sign" by Ace of Base.
   if (!userQuery) { userQuery = 'the sign ace of base' }
   spotify.search({ type: 'track', query: userQuery, limit: 1 }, function (error, data) {
@@ -85,14 +84,12 @@ function song() {
   })
 }
 
-song()
-put spotify data in array
+// put spotify data in array
 let spotifyArr = data.track.items
 for (i = 0; i < spotifyArr.length; i++) {
   console.log("song")
   console.log(`Found this for you: \n\nArtist: ${data.track.items[i].album.artist[0].name} \nSong: ${data.track.items[i].name} \nSong Link: ${data.track.items[i].external_urls.spotify} \nAlbum: ${data.track.items[i].album.name}`)
 }
-
 //   * `movie-this`
 function movies() {
   if (!userQuery) = { userQuery = "mr nobody" }
@@ -104,7 +101,14 @@ function movies() {
   if (ratingsArr.length > 2) {
   }
 }
-// // function whatever() {
 
-
-// //       }
+//   * `do-what-it-says`
+function whatever() {
+  fs.readFile('random.txt', 'utf8', function (error, data) {
+    if (error) { return console.log(error); }
+    let dataArr = data.spotify(',');
+    userInput = dataArr[0];
+    userQuery = dataArr[1];
+    userCommand(userInput, userQuery);
+  })
+}
