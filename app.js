@@ -50,12 +50,13 @@ userCommand(userInput, userQuery)
 // * `concert-this`
 function concert() {
   console.log(`Searching For ... ${userQuery} Shows!`)
-  let queryUrl = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
-  console.log(queryUrl)
-  let userBand = JSON.parse(body);
-  axios.get(queryUrl).then(function (response) {
-    console.log(response.data)
-  })
+  // request ("https://rest.bandsintown.com/artists/" + userQuery + "events?app_id=codingbootcamp" + bandsintown);
+  console.log(userQuery)
+  axios.get(`"https://rest.bandsintown.com/artists/" + userQuery + "events?app_id=codingbootcamp"`)
+    .then(function (response) {
+      console.log(response.data)
+    })
+  let userBand = JSON.parse('https://rest.bandsintown.com/artists/events?app_id=codingbootcamp')
   if (userBand.length > 0) {
     // for every concert (name, venue , country, city, date format with moment)
     for (i = 0; i < 1; i++) {
@@ -85,14 +86,16 @@ function song() {
       console.log('Error:' + error);
     }
   })
+  // put spotify data in array
+  let spotifyArr = data.track.items
+  console.log(data.track.items)
+  for (i = 0; i < spotifyArr.length; i++) {
+    console.log("song")
+    console.log(`Found this for you: \n\nArtist: ${data.track.items[i].album.artist[0].name} \nSong: ${data.track.items[i].name} \nSong Link: ${data.track.items[i].external_urls.spotify} \nAlbum: ${data.track.items[i].album.name}`)
+  }
 }
 
-// put spotify data in array
-let spotifyArr = data.track.items
-for (i = 0; i < spotifyArr.length; i++) {
-  console.log("song")
-  console.log(`Found this for you: \n\nArtist: ${data.track.items[i].album.artist[0].name} \nSong: ${data.track.items[i].name} \nSong Link: ${data.track.items[i].external_urls.spotify} \nAlbum: ${data.track.items[i].album.name}`)
-}
+
 //   * `movie-this`
 function movies() {
   if (!userQuery) { userQuery = "mr nobody" }
@@ -106,14 +109,15 @@ function movies() {
   } else {
     console.log('Movie not found!' + error)
   }
+}
 
-  //   * `do-what-it-says`
-  function whatever() {
-    fs.readFile('random.txt', 'utf8', function (error, data) {
-      if (error) { return console.log(error); }
-      let dataArr = data.spotify(',');
-      userInput = dataArr[0];
-      userQuery = dataArr[1];
-      userCommand(userInput, userQuery);
-    })
-  }
+//   * `do-what-it-says`
+function whatever() {
+  fs.readFile('random.txt', 'utf8', function (error, data) {
+    if (error) { return console.log(error); }
+    let dataArr = data.split(',');
+    userInput = dataArr[0];
+    userQuery = dataArr[1];
+    userCommand(userQuery);
+  })
+}
