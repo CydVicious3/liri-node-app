@@ -49,10 +49,11 @@ userCommand(userInput, userQuery)
 
 // * `concert-this`
 function concert() {
+  let userQuery = ' '
   console.log(`Searching For ... ${userQuery} Shows!`)
   // request ("https://rest.bandsintown.com/artists/" + userQuery + "events?app_id=codingbootcamp" + bandsintown);
   console.log(userQuery)
-  axios.get(`"https://rest.bandsintown.com/artists/" + userQuery + "events?app_id=codingbootcamp"`)
+  axios.get(`https://rest.bandsintown.com/artists/${userQuery}events?app_id=codingbootcamp`)
     .then(function (response) {
       console.log(response.data)
     })
@@ -76,6 +77,7 @@ function concert() {
 //     .then(data => { }
 // }
 
+// spotify-this-song 
 function song() {
   console.log(`Searching For ... ${userQuery} Song!`)
   let spotify = new Spotify(keys.spotify);
