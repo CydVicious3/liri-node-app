@@ -49,28 +49,34 @@ userCommand(userInput, userQuery)
 
 // * `concert-this`
 function concert() {
-  let userQuery = ' '
+
+  //let userQuery = ' '
   console.log(`Searching For ... ${userQuery} Shows!`)
   // request ("https://rest.bandsintown.com/artists/" + userQuery + "events?app_id=codingbootcamp" + bandsintown);
   console.log(userQuery)
-  axios.get(`https://rest.bandsintown.com/artists/${userQuery}events?app_id=codingbootcamp`)
+  var query = `https://rest.bandsintown.com/artists/${userQuery}/events?app_id=codingbootcamp`
+  console.log(query)
+  axios.get(query)
     .then(function (response) {
       console.log(response.data)
-    })
-  let userBand = JSON.parse('https://rest.bandsintown.com/artists/events?app_id=codingbootcamp')
-  if (userBand.length > 0) {
-    // for every concert (name, venue , country, city, date format with moment)
-    for (i = 0; i < 1; i++) {
-      console.log(`
-      \nArtist: ${userBand[i].lineup[0]} \nVenue: ${userBand[i].venue.name} \nVenue Location: ${userBand[i].venue.city}, ${userBand[i].venue.country}`);
-      let concertDate = moment(userBand[1].datetime).format('MM/DD/YY  hh:00 A');
-      console.log(`Date and Time: ${concertDate}`);
-    }
-  } else {
-    console.log('Band / Concert Not Found!');
-  }
-}
 
+      let events = response.data
+
+      if (events.length > 0) {
+        // for every concert (name, venue , country, city, date format with moment)
+        for (let i = 0; i < events.length; i++) {
+          console.log(`
+      \nArtist: ${events[i].lineup} \nVenue: ${events[i].venue.name} \nVenue Location: ${events[i].venue.city}, ${events[i].venue.country}`);
+          let concertDate = moment(events[i].datetime).format('MM/DD/YY  hh:00 A');
+          console.log(`Date and Time: ${concertDate}`)
+        }
+      }
+      else {
+        console.log('Band / Concert Not Found!');
+
+      }
+    })
+}
 // function song() {
 //   fetch('https://www.npmjs.com/package/node-spotify-api')
 //     .then(r => r.json())
@@ -87,30 +93,42 @@ function song() {
     if (error) {
       console.log('Error:' + error);
     }
+
+
+    // put spotify data in array
+    //console.log(data)
+    let spotifyArr = data.tracks.items[0]
+    console.log(spotifyArr)
+    // for (i = 0; i < spotifyArr.length; i++) {
+    //   console.log("song")
+    console.log(`Found this for you: \n\nArtist:  ${spotifyArr.artists[0].name}  \nSong: ${spotifyArr.name} \nSong Link: ${spotifyArr.preview_url} \nAlbum: ${spotifyArr.album.name}`)
+    // }
+
   })
-  // put spotify data in array
-  let spotifyArr = data.track.items
-  console.log(data.track.items)
-  for (i = 0; i < spotifyArr.length; i++) {
-    console.log("song")
-    console.log(`Found this for you: \n\nArtist: ${data.track.items[i].album.artist[0].name} \nSong: ${data.track.items[i].name} \nSong Link: ${data.track.items[i].external_urls.spotify} \nAlbum: ${data.track.items[i].album.name}`)
-  }
 }
 
 
 //   * `movie-this`
 function movies() {
   if (!userQuery) { userQuery = "mr nobody" }
-  request('http://www.omdbapi.com/?t=' + userQuery + '&apikey=trilogy')
-  let userMovie = JSON.parse(body)
-  let ratingsArr = userMovie.Ratings
-  if (ratingsArr.length > 2) {
-  }
-  if (!error && response.statusCode === 200) {
-    console.log(`\nFound this...\n\n Title: ${userMovie.Title}\nReleased: ${userMovie.Year}\nIMDb Rating: ${userMovie.imdbRating}\nRotten Tomatoes Rating: ${userMovie.Ratings[1].Value}\nCountry: ${userMovie.Country}\nLanguage: ${userMovie.Language}\n Plot: ${userMovie.Plot}`)
-  } else {
-    console.log('Movie not found!' + error)
-  }
+  var query = 'http://www.omdbapi.com/?t=' + userQuery + '&apikey=trilogy'
+  console.log(query)
+  axios(query)
+    .then(function (body) {
+      console.log(body.data)
+      let userMovie = body.data
+      let ratingsArr = userMovie.Ratings
+      if (ratingsArr.length > 2) {
+      }
+      if (body.data) {
+        console.log(`\nFound this...\nTitle: ${userMovie.Title}\nReleased: ${userMovie.Year}\nIMDb Rating: ${userMovie.imdbRating}\nRotten Tomatoes Rating: ${userMovie.Ratings[1].Value}\nCountry: ${userMovie.Country}\nLanguage: ${userMovie.Language}\nPlot: ${userMovie.Plot}`)
+      } else {
+        console.log('Movie not found!' + error)
+      }
+
+
+    })
+
 }
 
 //   * `do-what-it-says`
