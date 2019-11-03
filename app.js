@@ -49,19 +49,13 @@ userCommand(userInput, userQuery)
 
 // * `concert-this`
 function concert() {
-
-  //let userQuery = ' '
   console.log(`Searching For ... ${userQuery} Shows!`)
-  // request ("https://rest.bandsintown.com/artists/" + userQuery + "events?app_id=codingbootcamp" + bandsintown);
-  console.log(userQuery)
   var query = `https://rest.bandsintown.com/artists/${userQuery}/events?app_id=codingbootcamp`
   console.log(query)
   axios.get(query)
     .then(function (response) {
       console.log(response.data)
-
       let events = response.data
-
       if (events.length > 0) {
         // for every concert (name, venue , country, city, date format with moment)
         for (let i = 0; i < events.length; i++) {
@@ -77,11 +71,6 @@ function concert() {
       }
     })
 }
-// function song() {
-//   fetch('https://www.npmjs.com/package/node-spotify-api')
-//     .then(r => r.json())
-//     .then(data => { }
-// }
 
 // spotify-this-song 
 function song() {
@@ -96,17 +85,10 @@ function song() {
 
 
     // put spotify data in array
-    //console.log(data)
     let spotifyArr = data.tracks.items[0]
-    console.log(spotifyArr)
-    // for (i = 0; i < spotifyArr.length; i++) {
-    //   console.log("song")
     console.log(`Found this for you: \n\nArtist:  ${spotifyArr.artists[0].name}  \nSong: ${spotifyArr.name} \nSong Link: ${spotifyArr.preview_url} \nAlbum: ${spotifyArr.album.name}`)
-    // }
-
   })
 }
-
 
 //   * `movie-this`
 function movies() {
