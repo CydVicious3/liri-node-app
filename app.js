@@ -44,9 +44,7 @@ function userCommand(userInput, userQuery) {
       break;
   }
 }
-
 userCommand(userInput, userQuery)
-
 // * `concert-this`
 function concert() {
   console.log(`Searching For ... ${userQuery} Shows!`)
